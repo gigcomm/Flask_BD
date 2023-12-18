@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Таблицы</title>
+</head>
+<body>
+    <h1>Таблицы</h1>
+    <h2>Assortment Table</h2>
+    <form action="/add_assortment" method="post">
+        <input type="text" name="titles_product" placeholder="Titles Product">
+        <input type="submit" value="Add">
+    </form>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Titles Product</th>
+            <th>Actions</th>
+        </tr>
+        {% for item in assortment_data %}
+        <tr>
+            <td>{{ item.id }}</td>
+            <td>{{ item.titles_product }}</td>
+            <td>
+                <!-- Форма для удаления записи -->
+                <form action="/delete_assortment/{{ item.id }}" method="post" style="display: inline;">
+                    <input type="submit" value="Delete">
+                </form>
+
+                <!-- Форма для изменения записи -->
+                <form action="/update_assortment/{{ item.id }}" method="post" style="display: inline;">
+                    <input type="text" name="updated_titles_product" placeholder="Updated Titles Product">
+                    <input type="submit" value="Update">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Товары</h2>
+
+        <form action="/add_product" method="post">
+        <input type="text" name="title" placeholder="Title">
+        <input type="submit" value="Add">
+    </form>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Actions</th>
+        </tr>
+        {% for item in product_data %}
+        <tr>
+            <td>{{ item.id }}</td>
+            <td>{{ item.title }}</td>
+            <td>
+                <!-- Форма для удаления записи -->
+                <form action="/delete_product/{{ item.id }}" method="post" style="display: inline;">
+                    <input type="submit" value="Delete">
+                </form>
+
+                <!-- Форма для изменения записи -->
+                <form action="/update_product/{{ item.id }}" method="post" style="display: inline;">
+                    <input type="text" name="updated_title" placeholder="Updated Title">
+                    <input type="submit" value="Update">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Мастерские</h2>
+    <form action="/add_workshop" method="post">
+        <input type="text" name="adress" placeholder="Address">
+        <input type="text" name="phone" placeholder="Phone">
+        <input type="submit" value="Add">
+    </form>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Address</th>
+            <th>Phone</th>
+            <th>Actions</th>
+        </tr>
+        {% for item in workshop_data %}
+        <tr>
+            <td>{{ item.id }}</td>
+            <td style="width: 250px;">{{ item.adress }}</td>
+            <td>{{ item.phone }}</td>
+            <td>
+                <!-- Форма для удаления записи -->
+                <form action="/delete_workshop/{{ item.id }}" method="post" style="display: inline;">
+                    <input type="submit" value="Delete">
+                </form>
+
+                <!-- Форма для изменения записи -->
+                <form action="/update_workshop/{{ item.id }}" method="post" style="display: inline;">
+                    <input type="text" name="updated_adress" placeholder="Updated Address">
+                    <input type="text" name="updated_phone" placeholder="Updated Phone">
+                    <input type="submit" value="Update">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Товар</title>
+</head>
+<body>
+    <h1>Товар</h1>
+
+    <!-- Форма для добавления новой записи -->
+    <form action="/add_product" method="post">
+        <input type="text" name="title" placeholder="Title">
+        <input type="submit" value="Add">
+    </form>
+
+    <!-- Таблица с текущими записями из таблицы товаров -->
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Actions</th>
+        </tr>
+        {% for item in product_data %}
+        <tr>
+            <td>{{ item.id }}</td>
+            <td>{{ item.title }}</td>
+            <td>
+                <!-- Форма для удаления записи -->
+                <form action="/delete_product/{{ item.id }}" method="post" style="display: inline;">
+                    <input type="submit" value="Delete">
+                </form>
+
+                <!-- Форма для изменения записи -->
+                <form action="/update_product/{{ item.id }}" method="post" style="display: inline;">
+                    <input type="text" name="updated_title" placeholder="Updated Title">
+                    <input type="submit" value="Update">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

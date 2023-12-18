@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Мастерская</title>
+</head>
+<body>
+    <h1>Мастерская</h1>
+
+    <!-- Форма для добавления новой записи -->
+    <form action="/add_workshop" method="post">
+        <input type="text" name="adress" placeholder="Address">
+        <input type="text" name="phone" placeholder="Phone">
+        <input type="submit" value="Add">
+    </form>
+
+    <!-- Таблица с текущими записями из таблицы "workshop" -->
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Address</th>
+            <th>Phone</th>
+            <th>Actions</th>
+        </tr>
+        {% for item in workshop_data %}
+        <tr>
+            <td>{{ item.id }}</td>
+            <td style="width: 250px;">{{ item.adress }}</td>
+            <td>{{ item.phone }}</td>
+            <td>
+                <!-- Форма для удаления записи -->
+                <form action="/delete_workshop/{{ item.id }}" method="post" style="display: inline;">
+                    <input type="submit" value="Delete">
+                </form>
+
+                <!-- Форма для изменения записи -->
+                <form action="/update_workshop/{{ item.id }}" method="post" style="display: inline;">
+                    <input type="text" name="updated_adress" placeholder="Updated Address">
+                    <input type="text" name="updated_phone" placeholder="Updated Phone">
+                    <input type="submit" value="Update">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

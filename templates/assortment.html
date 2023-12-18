@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ассортимент</title>
+</head>
+<body>
+    <h1>Ассортимент</h1>
+
+    <!-- Форма для добавления новой записи -->
+    <form action="/add_assortment" method="post">
+        <input type="text" name="titles_product" placeholder="Titles Product">
+        <input type="submit" value="Add">
+    </form>
+
+    <!-- Таблица с текущими записями из таблицы assortment -->
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Titles Product</th>
+            <th>Actions</th>
+        </tr>
+        {% for item in assortment_data %}
+        <tr>
+            <td>{{ item.id }}</td>
+            <td>{{ item.titles_product }}</td>
+            <td>
+                <!-- Форма для удаления записи -->
+                <form action="/delete_assortment/{{ item.id }}" method="post" style="display: inline;">
+                    <input type="submit" value="Delete">
+                </form>
+
+                <!-- Форма для изменения записи -->
+                <form action="/update_assortment/{{ item.id }}" method="post" style="display: inline;">
+                    <input type="text" name="updated_titles_product" placeholder="Updated Titles Product">
+                    <input type="submit" value="Update">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
